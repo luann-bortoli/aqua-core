@@ -36,6 +36,11 @@ public class PoolService
         return paginationMapper.toResponse(page);
     }
 
+    public PoolResponse findById(UUID id)
+    {
+        return mapper.toResponse(findPoolById(id));
+    }
+
     public PoolResponse create(PoolRequest request)
     {
 
@@ -55,6 +60,13 @@ public class PoolService
         if (request.image() != null) target.setImage(request.image());
 
         return mapper.toResponse(repository.save(target));
+    }
+
+    public void delete(UUID id)
+    {
+        Pool target = findPoolById(id);
+
+        repository.delete(target);
     }
 
 }
