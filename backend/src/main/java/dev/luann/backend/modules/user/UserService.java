@@ -5,6 +5,7 @@ import dev.luann.backend.modules.user.dto.UserRequest;
 import dev.luann.backend.modules.user.dto.UserResponse;
 import dev.luann.backend.shared.exception.EmailAlreadyExistsException;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import dev.luann.backend.shared.pagination.PaginationMapper;
 import dev.luann.backend.shared.pagination.dto.PageResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class UserService
 
     private final UserRepository repository;
     private final UserMapper mapper;
+    private final PaginationMapper paginationMapper;
 
     private User findUserById(UUID id){
 
@@ -44,13 +46,7 @@ public class UserService
         Page<UserResponse> page = repository.findAll(pageable)
                 .map(mapper::toResponse);
 
-        return new PageResponse<>(
-                page.getContent(),
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages()
-        );
+        return paginationMapper.toResponse(page);
     }
 
     @Transactional
