@@ -5,6 +5,7 @@ import dev.luann.backend.modules.client.dto.ClientRequest;
 import dev.luann.backend.modules.client.dto.ClientResponse;
 import dev.luann.backend.shared.exception.EmailAlreadyExistsException;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import dev.luann.backend.shared.pagination.PaginationMapper;
 import dev.luann.backend.shared.pagination.dto.PageResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class ClientService
 
     private final ClientRepository repository;
     private final ClientMapper mapper;
+    private final PaginationMapper paginationMapper;
 
     private Client findClientById(UUID id)
     {
@@ -38,13 +40,7 @@ public class ClientService
         Page<ClientResponse> page = repository.findAll(pageable)
                 .map(mapper::toResponse);
 
-        return new PageResponse<>(
-                page.getContent(),
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages()
-        );
+        return paginationMapper.toResponse(page);
     }
 
     public ClientResponse findById(UUID id)
