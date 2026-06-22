@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class PaginationMapper
 {
 
-    public PageResponse toResponse(Page page)
+    public <T> PageResponse<T> toResponse(Page<T> page)
     {
         return new PageResponse<>(
                 page.getContent(),
