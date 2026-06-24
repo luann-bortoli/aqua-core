@@ -1,0 +1,53 @@
+.inputField {
+    position: relative;
+    margin: 0 0 16px 0;
+
+    input {
+        padding: 12px;
+        border: none;
+        border-bottom: 1px solid #777777;
+        outline: none;
+
+        &:focus
+        {
+            border-bottom: 1px solid var(--background-dark);
+        }
+    }
+
+    label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        width: 100%;
+        background: white;
+        padding: 0 4px;
+        color: #777;
+        pointer-events: none;
+
+        transition: all 0.2s ease;
+    }
+
+    .showPasswordButton{
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        top: 8px;
+        left: 230px;
+
+        svg{
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+
+    input:focus+label,
+    input:not(:placeholder-shown)+label {
+        top: 0;
+        transform: translateY(-50%);
+        font-size: 0.75rem;
+        color: var(--background-dark);
+    }
+}
