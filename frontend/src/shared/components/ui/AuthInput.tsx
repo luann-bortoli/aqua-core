@@ -1,8 +1,8 @@
 'use client'
 
 import s from './AuthInput.module.css'
-import { Eye, EyeOff} from 'lucide-react'
-import {useState} from "react";
+import { Eye, EyeOff } from 'lucide-react'
+import { useState } from "react";
 
 type InputFieldProps =
     {
@@ -19,13 +19,14 @@ export default function InputField({ type, id, text, placeholder }: InputFieldPr
     return (
         <>
             <div className={s.inputField}>
-                <input id={id} name={id} type={showPassword ? "text" : "password"} placeholder={placeholder}/>
+                <input id={id} name={id} type={showPassword ? "text" : "password"} placeholder={placeholder} />
                 <label htmlFor={id}>{text}</label>
                 {type === 'password' && (
                     <button
+                        type='button'
                         onClick={() => setShowPassword(prevState => !prevState)}
                         className={s.showPasswordButton}>
-                        {showPassword ? <Eye /> : <EyeOff/>}
+                        {showPassword ? <Eye /> : <EyeOff />}
                     </button>
                 )}
             </div>
