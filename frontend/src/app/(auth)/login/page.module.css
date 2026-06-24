@@ -1,0 +1,64 @@
+.bodyContainer
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100%;
+
+    background-color: var(--background);
+
+    .cardContainer
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        padding: 64px 84px;
+        border-radius: 6px;
+        background-color: var(--card);
+        outline: solid 1px var(--card-outline);
+        gap: 32px 0;
+
+
+        .inputWrapper
+        {
+            width: 100%;
+
+            input
+            {
+                width: 100%;
+            }
+
+            a{
+                font-size: 13px;
+                color: #777777;
+
+                &:hover{
+                    color: var(--text-primary);
+                }
+            }
+        }
+
+        .submitButton
+        {
+            background-color: var(--background-dark);
+            color: var(--text-primary-dark);
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .copyright
+        {
+            font-size: 12px;
+            margin: 16px 0;
+        }
+    }
+}
