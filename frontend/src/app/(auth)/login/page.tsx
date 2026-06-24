@@ -21,7 +21,8 @@ export default function Login() {
                     <Image
                         src={"/logo.png"}
                         alt='logo'
-                        fill
+                        width={157}
+                        height={78}
                     />
 
                     <div className={s.inputWrapper}>
