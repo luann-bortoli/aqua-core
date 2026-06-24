@@ -8,8 +8,7 @@
         border-bottom: 1px solid #777777;
         outline: none;
 
-        &:focus
-        {
+        &:focus {
             border-bottom: 1px solid var(--background-dark);
         }
     }
@@ -29,7 +28,7 @@
         transition: all 0.2s ease;
     }
 
-    .showPasswordButton{
+    .showPasswordButton {
         position: absolute;
         background-color: transparent;
         border: none;
@@ -37,9 +36,10 @@
         top: 8px;
         left: 230px;
 
-        svg{
+        svg {
             height: 20px;
             cursor: pointer;
+            color: var(--background-dark);
         }
     }
 
