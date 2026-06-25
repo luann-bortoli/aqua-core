@@ -6,9 +6,31 @@ import s from './page.module.css'
 import AuthInput from '@/src/shared/components/ui/AuthInput'
 import { useState } from 'react'
 
+type FormProps = {
+    email: string,
+    password: string
+}
+
 export default function Login() {
 
     const [loading, setLoading] = useState<boolean>(false)
+
+    const [form, setForm] = useState<FormProps>(
+        {
+            email: "",
+            password: ""
+        }
+    )
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const { name, value } = e.target
+
+        setForm(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
 
     const handleSubmit = () => {
 
@@ -28,6 +50,8 @@ export default function Login() {
                     <div className={s.inputWrapper}>
 
                         <AuthInput
+                            onChange={handleChange}
+                            value={form.email}
                             type='email'
                             id='email'
                             text='Digite seu email'
@@ -35,6 +59,8 @@ export default function Login() {
                         />
 
                         <AuthInput
+                            onChange={handleChange}
+                            value={form.password}
                             type='password'
                             id='password'
                             text='Digite sua senha'
