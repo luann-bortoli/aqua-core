@@ -10,16 +10,25 @@ type InputFieldProps =
         id: string
         text: string
         placeholder: string
+        value: string
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     }
 
-export default function InputField({ type, id, text, placeholder }: InputFieldProps) {
+export default function InputField({ type, id, text, placeholder, value, onChange }: InputFieldProps) {
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     return (
         <>
             <div className={s.inputField}>
-                <input id={id} name={id} type={showPassword ? "text" : "password"} placeholder={placeholder} />
+                <input
+                    onChange={onChange}
+                    value={value}
+                    id={id}
+                    name={id}
+                    type={showPassword ? "text" : "password"}
+                    placeholder={placeholder}
+                />
                 <label htmlFor={id}>{text}</label>
                 {type === 'password' && (
                     <button
