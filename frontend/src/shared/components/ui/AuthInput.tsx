@@ -26,7 +26,7 @@ export default function InputField({ type, id, text, placeholder, value, onChang
                     value={value}
                     id={id}
                     name={id}
-                    type={showPassword ? "text" : "password"}
+                    type={type === "password" ? showPassword ? "text" : "password" : type}
                     placeholder={placeholder}
                 />
                 <label htmlFor={id}>{text}</label>
