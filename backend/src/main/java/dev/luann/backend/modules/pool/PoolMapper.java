@@ -10,6 +10,7 @@ public class PoolMapper
     public PoolResponse toResponse(Pool pool)
     {
         return new PoolResponse(
+                pool.getId(),
                 pool.getTitle(),
                 pool.getStatus(),
                 pool.getImage()
