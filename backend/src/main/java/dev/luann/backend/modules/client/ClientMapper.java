@@ -11,6 +11,7 @@ public class ClientMapper
     public ClientResponse toResponse(Client client)
     {
         return new ClientResponse(
+                client.getId(),
                 client.getName(),
                 client.getEmail(),
                 client.getAddress(),
