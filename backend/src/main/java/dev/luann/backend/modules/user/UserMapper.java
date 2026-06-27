@@ -2,11 +2,17 @@ package dev.luann.backend.modules.user;
 
 import dev.luann.backend.modules.user.dto.UserRequest;
 import dev.luann.backend.modules.user.dto.UserResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class UserMapper
 {
+
+    private final PasswordEncoder encoder;
 
     public UserResponse toResponse(User user){
 
@@ -26,7 +32,7 @@ public class UserMapper
         user.setName(request.name());
         user.setRole(request.role());
         user.setEmail(request.email().trim().toLowerCase());
-        user.setPassword(request.password());
+        user.setPassword(encoder.encode(request.password()));
 
         return user;
 

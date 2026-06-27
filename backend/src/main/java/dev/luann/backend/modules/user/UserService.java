@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,6 +24,7 @@ public class UserService
     private final UserRepository repository;
     private final UserMapper mapper;
     private final PaginationMapper paginationMapper;
+    private final PasswordEncoder encoder;
 
     private User findUserById(UUID id){
 
@@ -94,7 +96,7 @@ public class UserService
         }
 
         if (request.password() != null) {
-            current.setPassword(request.password());
+            current.setPassword(encoder.encode(request.password()));
         }
 
         return  mapper.toResponse(repository.save(current));
