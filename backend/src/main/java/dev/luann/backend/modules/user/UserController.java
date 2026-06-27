@@ -45,7 +45,7 @@ public class UserController
 
     }
 
-    @PatchMapping
+    @PatchMapping("/{id}")
     public ResponseEntity<UserResponse> patch(
             @Valid @RequestBody UserPatchRequest request,
             @PathVariable UUID id){
@@ -54,7 +54,7 @@ public class UserController
 
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id){
 
         service.delete(id);
