@@ -1,0 +1,11 @@
+.messageWrapper {
+    width: 100%;
+    padding: 4px;
+
+    background-color: var(--error-background);
+    outline: solid 1px var(--error-outline);
+    color: var(--error-text);
+    border-radius: 4px;
+    font-size: 13px;
+    margin: -4px 0 16px 0;
+}
