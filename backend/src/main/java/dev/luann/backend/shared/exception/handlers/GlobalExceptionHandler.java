@@ -4,6 +4,7 @@ import dev.luann.backend.shared.exception.EmailAlreadyExistsException;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -56,4 +57,16 @@ public class GlobalExceptionHandler
         return problem;
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ProblemDetail handleBadCredentials(BadCredentialsException ex)
+    {
+        ProblemDetail problem =
+                ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+
+        problem.setTitle("Invalid credentials");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "AUTH_BAD_CREDENTIALS");
+
+        return problem;
+    }
 }
