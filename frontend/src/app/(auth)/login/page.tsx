@@ -3,79 +3,103 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import s from './page.module.css'
-import AuthInput from '@/src/shared/components/ui/AuthInput'
+import AuthInput from '@/src/shared/components/ui/auth-input/AuthInput'
+import { login } from '@/src/shared/services/auth'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { loginSchema, LoginSchema } from '@/src/shared/schema/login/schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { sleep } from '@/src/shared/utils/async'
+import InputError from '@/src/shared/components/feedback/input-error/InputError'
+import { getCurrentYear } from '@/src/shared/utils/date'
+import GlobalError from '@/src/shared/components/feedback/global-error/GlobalError'
 import { useState } from 'react'
-
-type FormProps = {
-    email: string,
-    password: string
-}
+import { mapApiError } from '@/src/shared/lib/mapApiError'
 
 export default function Login() {
 
-    const [loading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState<String | null>(null)
 
-    const [form, setForm] = useState<FormProps>(
-        {
-            email: "",
-            password: ""
+    const router = useRouter()
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: {
+            errors,
+            isSubmitting,
+            isValid
         }
-    )
+    } = useForm<LoginSchema>({
+        resolver: zodResolver(loginSchema),
+        mode: "onChange"
+    })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onSubmit = async (data: LoginSchema) => {
 
-        const { name, value } = e.target
+        try
+        {
+            await login(data);
+            router.push("/dashboard")
 
-        setForm(prev => ({
-            ...prev,
-            [name]: value
-        }))
-    }
-
-    const handleSubmit = () => {
-
-    }
+        } catch (error)
+        {
+            await sleep(2000)
+        }
+    };
 
     return (
         <>
             <div className={s.bodyContainer}>
-                <form onSubmit={handleSubmit} className={s.cardContainer}>
+
+                <GlobalError message='oi' onClose={() => setError(null)} />
+
+                <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
                     <Image
                         src={"/logo.png"}
                         alt='logo'
                         width={157}
                         height={78}
+                        priority
                     />
 
                     <div className={s.inputWrapper}>
 
                         <AuthInput
-                            onChange={handleChange}
-                            value={form.email}
+                            {...register("email")}
                             type='email'
                             id='email'
                             text='Digite seu email'
                             placeholder='dave@gmail.com'
+                            error={errors.email?.message}
+                            autoComplete='email'
+                            autoCapitalize='none'
                         />
 
+                        {errors.email && <InputError message={errors.email?.message} />}
+
                         <AuthInput
-                            onChange={handleChange}
-                            value={form.password}
+                            {...register("password")}
                             type='password'
                             id='password'
                             text='Digite sua senha'
                             placeholder='••••••••'
+                            error={errors.password?.message}
+                            autoComplete='current-password'
                         />
+
+                        {errors.password && <InputError message={errors.password?.message} />}
 
                         <Link href={"/forgot-password"}>Esqueci a senha</Link>
                     </div>
 
                     <button
-                        disabled={loading}
+                        disabled={!isValid || isSubmitting}
                         type={"submit"}
-                        className={s.submitButton}>Acessar</button>
+                        className={s.submitButton}>{isSubmitting ? "Carregando..." : "Acessar"}</button>
 
-                    <p className={s.copyright}>© 2026 Quibenne. Todos os direitos reservados.</p>
+                    <p className={s.copyright}>© {getCurrentYear()} Quibenne. Todos os direitos reservados.</p>
 
                 </form>
             </div>
