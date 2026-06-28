@@ -56,17 +56,4 @@ public class GlobalExceptionHandler
 
         return problem;
     }
-
-    @ExceptionHandler(BadCredentialsException.class)
-    public ProblemDetail handleBadCredentials(BadCredentialsException ex)
-    {
-        ProblemDetail problem =
-                ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
-
-        problem.setTitle("Invalid credentials");
-        problem.setDetail(ex.getMessage());
-        problem.setProperty("errorCode", "AUTH_BAD_CREDENTIALS");
-
-        return problem;
-    }
 }
