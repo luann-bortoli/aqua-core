@@ -19,9 +19,11 @@ export default function GlobalError({ message, onClose }: GlobalErrorProps) {
 
     return (
         <>
-            <MessageCircleWarning />
+            <div className={s.contentWrapper}>
+                <MessageCircleWarning />
 
-            <p>{message}</p>
+                <p>{message}</p>
+            </div>
         </>
     )
 }

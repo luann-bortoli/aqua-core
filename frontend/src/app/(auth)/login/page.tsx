@@ -14,18 +14,19 @@ import InputError from '@/src/shared/components/feedback/input-error/InputError'
 import { getCurrentYear } from '@/src/shared/utils/date'
 import GlobalError from '@/src/shared/components/feedback/global-error/GlobalError'
 import { useState } from 'react'
+import { ApiError } from '@/src/shared/types/error'
+import { normalizeCatchError } from '@/src/shared/utils/mapper'
 import { mapApiError } from '@/src/shared/lib/mapApiError'
 
 export default function Login() {
 
-    const [error, setError] = useState<String | null>(null)
+    const [loginError, setError] = useState<ApiError | null>(null)
 
     const router = useRouter()
 
     const {
         register,
         handleSubmit,
-        watch,
         formState: {
             errors,
             isSubmitting,
@@ -45,7 +46,9 @@ export default function Login() {
 
         } catch (error)
         {
-            await sleep(2000)
+            let apiError = normalizeCatchError(error)
+
+            setError(apiError ?? null)
         }
     };
 
@@ -53,7 +56,7 @@ export default function Login() {
         <>
             <div className={s.bodyContainer}>
 
-                <GlobalError message='oi' onClose={() => setError(null)} />
+                {loginError != null && <GlobalError message={mapApiError(loginError)} onClose={() => setError(null)} />}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
                     <Image
