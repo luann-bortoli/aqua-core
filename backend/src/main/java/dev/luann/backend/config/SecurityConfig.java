@@ -1,6 +1,8 @@
 package dev.luann.backend.config;
 
 import dev.luann.backend.modules.user.CustomUserDetailsService;
+import dev.luann.backend.shared.exception.handlers.RestAccessDeniedHandler;
+import dev.luann.backend.shared.exception.handlers.RestAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +26,9 @@ public class SecurityConfig
     private final CustomUserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
+    private final RestAuthenticationEntryPoint authenticationEntryPoint;
+    private final RestAccessDeniedHandler accessDeniedHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception
@@ -39,6 +44,11 @@ public class SecurityConfig
                 )
 
                 .authenticationProvider(authenticationProvider())
+
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
 
                 .authorizeHttpRequests(auth -> auth
 
