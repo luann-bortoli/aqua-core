@@ -64,23 +64,6 @@ public class AuthController
         );
     }
 
-    @PostMapping("/logout")
-    public LogoutResponse logout(HttpServletRequest request)
-    {
-        HttpSession session = request.getSession(false);
-
-        if (session != null)
-        {
-            session.invalidate();
-        }
-
-        SecurityContextHolder.clearContext();
-
-        return new LogoutResponse(
-                "Logout successful"
-        );
-    }
-
     @GetMapping("/me")
     public LoginResponse me(Authentication authentication)
     {

@@ -3,6 +3,7 @@ package dev.luann.backend.config;
 import dev.luann.backend.modules.user.CustomUserDetailsService;
 import dev.luann.backend.shared.exception.handlers.RestAccessDeniedHandler;
 import dev.luann.backend.shared.exception.handlers.RestAuthenticationEntryPoint;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,6 +71,15 @@ public class SecurityConfig
                         .logoutUrl("/auth/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.getWriter().write("""
+            {
+              "message": "Logout successful"
+            }
+        """);
+                        })
                 )
 
                 .build();
