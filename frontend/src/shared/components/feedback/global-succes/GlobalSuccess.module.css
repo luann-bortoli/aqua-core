@@ -1,0 +1,38 @@
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 16px;
+    z-index: 99999;
+
+    background-color: var(--success-background);
+    outline: solid 1px var(--success-outline);
+    color: var(--success-text);
+
+    padding: 16px;
+    border-radius: 4px;
+    width: 427px;
+
+    animation: 5s ease-in-out fadeOut forwards;
+
+    p {
+        margin: 16px 0;
+        text-align: center;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

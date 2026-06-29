@@ -6,6 +6,8 @@
     pointer-events: none;
 
     position: absolute;
+    left: 50%;
+    transform: translate(-50%);
     top: 16px;
     z-index: 99999;
 
@@ -17,10 +19,10 @@
     border-radius: 4px;
     width: 427px;
 
-    animation: 3s ease-in-out fadeOut forwards;
+    animation: 5s ease-in-out fadeOut forwards;
 
     p {
-        margin: 32px 0;
+        margin: 16px 0;
         text-align: center;
     }
 }

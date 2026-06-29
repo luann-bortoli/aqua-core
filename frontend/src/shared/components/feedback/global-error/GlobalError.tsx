@@ -14,7 +14,7 @@ export default function GlobalError({ message, onClose }: GlobalErrorProps) {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose()
-        }, 3000)
+        }, 5000)
     }, [onClose])
 
     return (

@@ -1,29 +1,34 @@
 .inputField {
+    display: flex;
+    flex-direction: column;
     position: relative;
     margin: 0 0 16px 0;
+
+    padding: 16px;
+    background-color: var(--card);
+    border-radius: 4px;
+    outline: solid 1px var(--card-outline);
 
     input {
         padding: 12px;
         border: none;
-        border-bottom: 1px solid #777777;
+        border-bottom: 1px solid var(--card-outline);
         outline: none;
+        background-color: transparent;
 
+        &:not(:placeholder-shown),
         &:focus {
             border-bottom: 1px solid var(--background-dark);
         }
     }
 
     label {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
         font-size: 14px;
         width: 100%;
-        background: white;
         padding: 0 4px;
-        color: #777;
+        color: var(--text-primary);
         pointer-events: none;
+        font-weight: 500;
 
         transition: all 0.2s ease;
     }
@@ -33,21 +38,13 @@
         background-color: transparent;
         border: none;
         outline: none;
-        top: 8px;
-        left: 230px;
+        top: 32px;
+        left: calc(100% - 48px);
 
         svg {
             height: 20px;
             cursor: pointer;
             color: var(--background-dark);
         }
-    }
-
-    input:focus+label,
-    input:not(:placeholder-shown)+label {
-        top: 0;
-        transform: translateY(-50%);
-        font-size: 0.75rem;
-        color: var(--background-dark);
     }
 }
