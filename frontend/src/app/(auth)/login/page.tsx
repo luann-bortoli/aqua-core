@@ -7,7 +7,7 @@ import AuthInput from '@/src/shared/components/ui/auth-input/AuthInput'
 import { login } from '@/src/shared/services/auth'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { loginSchema, LoginSchema } from '@/src/shared/schema/login/schema'
+import { loginSchema, LoginSchema } from '@/src/shared/schema/login'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sleep } from '@/src/shared/utils/async'
 import InputError from '@/src/shared/components/feedback/input-error/InputError'
@@ -20,7 +20,7 @@ import { mapApiError } from '@/src/shared/lib/mapApiError'
 
 export default function Login() {
 
-    const [loginError, setError] = useState<ApiError | null>(null)
+    const [loginError, setLoginError] = useState<ApiError | null>(null)
 
     const router = useRouter()
 
@@ -48,7 +48,7 @@ export default function Login() {
         {
             let apiError = normalizeCatchError(error)
 
-            setError(apiError ?? null)
+            setLoginError(apiError ?? null)
         }
     };
 
@@ -56,7 +56,7 @@ export default function Login() {
         <>
             <div className={s.bodyContainer}>
 
-                {loginError != null && <GlobalError message={mapApiError(loginError)} onClose={() => setError(null)} />}
+                {loginError != null && <GlobalError message={mapApiError(loginError)} onClose={() => setLoginError(null)} />}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
                     <Image
