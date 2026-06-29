@@ -15,15 +15,61 @@
   --error-text: #B91C1C;
   --error-title: #991B1B;
 
+  --success-background: #F0FDF4;
+  --success-outline: #86EFAC;
+  --success-text: #15803D;
+  --success-title: #166534;
+
   --text-primary: #111827;
   --text-secondary: #6B7280;
 
-  --background-dark: #0F172A;
+  --background-dark: #111827;
   --card-dark: #1E293B;
   --card-outline-dark: #334155;
 
   --text-primary-dark: #F8FAFC;
   --text-secondary-dark: #CBD5E1;
+
+  --sidebar-background: #FFFFFF;
+  --sidebar-border: #E5E7EB;
+
+  --sidebar-text: #4B5563;
+  --sidebar-text-hover: #111827;
+
+  --sidebar-hover: #F3F4F6;
+  --sidebar-active: #EEF2FF;
+
+  --sidebar-active-text: #111827;
+
+  /* Table */
+
+  --table-background: #FFFFFF;
+  --table-border: #E5E7EB;
+
+  --table-header-background: #F9FAFB;
+  --table-header-text: #374151;
+
+  --table-row-hover: #F3F4F6;
+  --table-row-alt: #FAFAFA;
+
+  --table-text: #111827;
+  --table-text-muted: #6B7280;
+
+  --table-action-hover: #EEF2FF;
+  --table-action-danger: #DC2626;
+  --table-action-danger-hover: #FEE2E2;
+
+  --status-success-bg: #DCFCE7;
+  --status-success-text: #166534;
+
+  --status-warning-bg: #FEF9C3;
+  --status-warning-text: #92400E;
+
+  --status-error-bg: #FEE2E2;
+  --status-error-text: #991B1B;
+
+  --status-info-bg: #DBEAFE;
+  --status-info-text: #1E40AF;
 }
 
 html {
@@ -34,6 +80,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: var(--background);
 }
 
 body {
