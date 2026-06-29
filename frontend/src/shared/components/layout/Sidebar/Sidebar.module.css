@@ -1,0 +1,53 @@
+.nav {
+    padding: 8px;
+    background-color: var(--sidebar-background);
+    border: solid 1px var(--sidebar-border);
+    border-top: none;
+    z-index: 999;
+
+    height: 100%;
+    width: fit-content;
+
+    .sidebarItem {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        width: 200px;
+
+        a,
+        button {
+            display: flex;
+            align-items: center;
+
+            width: 100%;
+
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 8px 0;
+            border-radius: 4px;
+            color: var(--sidebar-text);
+
+            &:hover {
+                color: var(--sidebar-text-hover);
+                cursor: pointer;
+                background-color: var(--sidebar-hover);
+            }
+
+            svg {
+                margin: 0 12px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .active a,
+    .active button {
+        color: var(--sidebar-active-text);
+        font-weight: 500;
+    }
+}

@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--card);
+
+    width: 100%;
+
+    padding: 16px 0 0 16px;
+
+    .imageContainer {
+        width: 201px;
+        padding-bottom: 16px;
+    }
+
+    .handleBorder {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex: 1;
+
+        border-bottom: solid 1px var(--sidebar-border);
+
+        p {
+            margin: 0 32px 16px 0;
+        }
+    }
+}
