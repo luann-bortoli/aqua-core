@@ -1,6 +1,6 @@
 export function mapApiError(error: any): string {
 
-    switch (error.errorCode)
+    switch (error.errorCode ?? error.status)
     {
         case "AUTH_BAD_CREDENTIALS":
             return "Email ou senha inválidos."
@@ -19,6 +19,9 @@ export function mapApiError(error: any): string {
 
         case "AUTH_FAILED":
             return "Autenticação falhou."
+
+        case 400:
+            return "Solicitação inválida."
 
         default:
             return "Erro inesperado."
