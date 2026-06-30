@@ -43,7 +43,7 @@ public class ClientController
                 .body(service.create(request));
     }
 
-    @PatchMapping
+    @PatchMapping("/{id}")
     public ResponseEntity<ClientResponse> patch(
             @Valid @RequestBody ClientPatchRequest request,
             @PathVariable UUID id
@@ -52,7 +52,7 @@ public class ClientController
         return ResponseEntity.ok(service.patch(id, request));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable UUID id
     )

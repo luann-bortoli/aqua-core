@@ -26,7 +26,8 @@ public class ClientMapper
         client.setName(request.name());
         client.setEmail(request.email());
         client.setAddress(request.address());
-        client.setPassword(request.phone());
+        client.setPhone(request.phone());
+        client.setPassword(request.password());
 
         return client;
     }
