@@ -28,7 +28,7 @@ public class PoolController {
 
     @GetMapping
     public ResponseEntity<PageResponse<PoolResponse>> findAll(
-            @PageableDefault(sort = "name")Pageable pageable
+            @PageableDefault(sort = "updatedAt")Pageable pageable
             ){
         return ResponseEntity.ok(service.findAll(pageable));
     }

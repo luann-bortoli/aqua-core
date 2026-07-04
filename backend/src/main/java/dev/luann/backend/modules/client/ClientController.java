@@ -29,7 +29,7 @@ public class ClientController
 
     @GetMapping
     public ResponseEntity<PageResponse<ClientResponse>> findAll(
-            @PageableDefault(sort = "name")Pageable pageable
+            @PageableDefault(sort = "updatedAt")Pageable pageable
             ){
         return ResponseEntity.ok(service.findAll(pageable));
     }

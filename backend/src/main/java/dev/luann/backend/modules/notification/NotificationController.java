@@ -23,7 +23,7 @@ public class NotificationController
 
     @GetMapping
     public ResponseEntity<PageResponse<NotificationResponse>> findAll(
-            @PageableDefault(sort = "name") Pageable pageable
+            @PageableDefault(sort = "updatedAt") Pageable pageable
             ){
         return ResponseEntity.ok(service.findAll(pageable));
     }
