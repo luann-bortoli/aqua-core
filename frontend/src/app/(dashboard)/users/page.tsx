@@ -13,6 +13,7 @@ import { normalizeCatchError } from '@/src/shared/utils/mapper'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
 import Confirmation from '@/src/shared/components/feedback/confirmation/Confirmation'
 import Link from 'next/link'
+import { PageResponse } from '@/src/shared/types/entity'
 
 type User = {
     id: string
