@@ -8,7 +8,7 @@ public record PoolResponse(
 
         UUID id,
         String title,
-        ContentStatus Status,
+        ContentStatus status,
         String image
 
 )
