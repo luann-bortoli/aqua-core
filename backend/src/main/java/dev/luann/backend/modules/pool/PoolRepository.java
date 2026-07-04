@@ -1,6 +1,6 @@
 package dev.luann.backend.modules.pool;
 
-import dev.luann.backend.shared.entity.enums.ContentStatus;
+import dev.luann.backend.shared.enums.ContentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

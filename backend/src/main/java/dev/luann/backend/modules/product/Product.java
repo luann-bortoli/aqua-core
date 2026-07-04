@@ -1,7 +1,7 @@
 package dev.luann.backend.modules.product;
 
 import dev.luann.backend.shared.entity.BaseEntity;
-import dev.luann.backend.shared.entity.enums.ContentStatus;
+import dev.luann.backend.shared.enums.ContentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

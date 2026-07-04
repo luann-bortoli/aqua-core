@@ -1,6 +1,6 @@
 package dev.luann.backend.modules.pool.dto;
 
-import dev.luann.backend.shared.entity.enums.ContentStatus;
+import dev.luann.backend.shared.enums.ContentStatus;
 
 public record PoolPatchRequest(
 
