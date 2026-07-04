@@ -7,6 +7,7 @@ import dev.luann.backend.shared.pagination.dto.PageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UserController
 
     @GetMapping
     public ResponseEntity<PageResponse<UserResponse>> findAll(
-            @PageableDefault(sort = "updatedAt") Pageable pageable
+            @PageableDefault(sort = "updatedAt", direction = Sort.Direction.DESC) Pageable pageable
             ){
         return ResponseEntity.ok(service.findAll(pageable));
     }
