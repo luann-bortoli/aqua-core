@@ -4,6 +4,7 @@ import dev.luann.backend.modules.client.Client;
 import dev.luann.backend.modules.pool.dto.PoolRequest;
 import dev.luann.backend.modules.pool.dto.PoolResponse;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import dev.luann.backend.shared.file.FileStorageService;
 import dev.luann.backend.shared.pagination.PaginationMapper;
 import dev.luann.backend.shared.pagination.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class PoolService
     private final PoolRepository repository;
     private final PoolMapper mapper;
     private final PaginationMapper paginationMapper;
+    private final FileStorageService fileStorageService;
 
     private Pool findPoolById(UUID id)
     {
@@ -43,8 +45,10 @@ public class PoolService
 
     public PoolResponse create(PoolRequest request)
     {
+        String imagePath = fileStorageService.save(request.image());
 
         Pool pool = mapper.toEntity(request);
+        pool.setImage(imagePath);
 
         return mapper.toResponse(repository.save(pool));
     }
@@ -53,11 +57,15 @@ public class PoolService
     {
         Pool target = findPoolById(id);
 
+        if (request.image() != null)
+        {
+            String imagePath = fileStorageService.save(request.image());
+            target.setImage(imagePath);
+        }
+
         if (request.title() != null) target.setTitle(request.title());
 
         if (request.status() != null) target.setStatus(request.status());
-
-        if (request.image() != null) target.setImage(request.image());
 
         return mapper.toResponse(repository.save(target));
     }

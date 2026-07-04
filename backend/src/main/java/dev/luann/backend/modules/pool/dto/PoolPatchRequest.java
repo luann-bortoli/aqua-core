@@ -1,6 +1,7 @@
 package dev.luann.backend.modules.pool.dto;
 
 import dev.luann.backend.shared.enums.ContentStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 public record PoolPatchRequest(
 
@@ -8,7 +9,7 @@ public record PoolPatchRequest(
 
         ContentStatus status,
 
-        String image
+        MultipartFile image
 
 )
 {

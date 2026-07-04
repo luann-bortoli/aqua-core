@@ -23,7 +23,6 @@ public class PoolMapper
 
         pool.setTitle(request.title());
         pool.setStatus(request.status());
-        pool.setImage(request.image());
 
         return pool;
     }
