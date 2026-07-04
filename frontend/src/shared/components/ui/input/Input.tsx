@@ -2,26 +2,23 @@
 
 import s from './Input.module.css'
 import { Eye, EyeOff } from 'lucide-react'
-import {
-    forwardRef,
-    InputHTMLAttributes,
-    useState
-} from 'react'
+import { forwardRef, InputHTMLAttributes, useState } from 'react'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     text: string
     error?: string
+    fileName?: string
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type, id, text, placeholder, error, ...props }, ref) => {
+    ({ type, id, text, placeholder, error, fileName, ...props }, ref) => {
 
         const [showPassword, setShowPassword] = useState(false)
 
         return (
             <div className={s.inputField}>
 
-                <label htmlFor={id}>
+                <label className={s.titleLabel} htmlFor={id}>
                     {text}
                 </label>
 
@@ -37,6 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                             : type
                     }
                     placeholder={placeholder}
+                    hidden={type === 'file'}
                 />
 
                 {type === 'password' && (
@@ -47,6 +45,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     >
                         {showPassword ? <Eye /> : <EyeOff />}
                     </button>
+                )}
+
+                {type === "file" && (
+                    <>
+                        <label className={s.interactionLabel} htmlFor={id}>Selecionar arquivo</label>
+
+                        <p className={s.fileName}>{fileName ?? "Nenhum arquivo selecionado"}</p>
+                    </>
                 )}
             </div>
         )
