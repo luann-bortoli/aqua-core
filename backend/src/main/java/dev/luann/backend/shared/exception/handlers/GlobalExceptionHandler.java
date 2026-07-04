@@ -6,6 +6,7 @@ import dev.luann.backend.shared.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -66,6 +67,18 @@ public class GlobalExceptionHandler
         problem.setTitle("File storage error");
         problem.setDetail(ex.getMessage());
         problem.setProperty("errorCode", "FILE_STORAGE_ERROR");
+
+        return problem;
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ProblemDetail handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex)
+    {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+
+        problem.setTitle("Media type not supported");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "UNSUPPORTED_MEDIA_TYPE");
 
         return problem;
     }
