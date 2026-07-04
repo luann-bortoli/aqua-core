@@ -22,7 +22,7 @@
         }
     }
 
-    label {
+    .titleLabel {
         font-size: 14px;
         width: 100%;
         padding: 0 4px;
@@ -31,6 +31,23 @@
         font-weight: 500;
 
         transition: all 0.2s ease;
+    }
+
+    .interactionLabel {
+        font-size: 14px;
+        width: 100%;
+        padding: 16px;
+        color: var(--text-primary);
+        cursor: pointer;
+
+        border-bottom: 1px solid var(--card-outline);
+        transition: all 0.2s ease;
+    }
+
+    .fileName {
+        font-size: 14px;
+        padding: 16px 16px 4px;
+        color: var(--text-secondary)
     }
 
     .showPasswordButton {
