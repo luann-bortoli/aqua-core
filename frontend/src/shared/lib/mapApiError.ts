@@ -20,6 +20,9 @@ export function mapApiError(error: any): string {
         case "AUTH_FAILED":
             return "Autenticação falhou."
 
+        case "UNSUPPORTED_MEDIA_TYPE":
+            return "Arquivo não suportado."
+
         case 400:
             return "Solicitação inválida."
 
