@@ -4,7 +4,7 @@ export const userSchema = z.object({
     name: z
         .string()
         .trim()
-        .min(1, "Digite o nome."),
+        .min(3, "Nome muito curto."),
 
     email: z
         .string()
