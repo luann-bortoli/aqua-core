@@ -1,0 +1,19 @@
+.statusWrapper {
+    display: flex;
+    align-items: center;
+
+    .statusBadge {
+        height: 8px;
+        aspect-ratio: 1/1;
+        border-radius: 100px;
+    }
+
+    .statusLabel {
+        width: fit-content;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--text-primary);
+        font-weight: 400;
+    }
+}
