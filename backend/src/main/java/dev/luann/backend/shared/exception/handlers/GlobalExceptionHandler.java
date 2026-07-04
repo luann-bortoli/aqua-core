@@ -1,6 +1,7 @@
 package dev.luann.backend.shared.exception.handlers;
 
 import dev.luann.backend.shared.exception.EmailAlreadyExistsException;
+import dev.luann.backend.shared.exception.FileStorageException;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -53,6 +54,18 @@ public class GlobalExceptionHandler
         problem.setTitle("Method argument invalid");
         problem.setDetail(ex.getMessage());
         problem.setProperty("errorCode", "METHOD_ARGUMENT_INVALID");
+
+        return problem;
+    }
+
+    @ExceptionHandler(FileStorageException.class)
+    public ProblemDetail handleFileStorageException(FileStorageException ex)
+    {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        problem.setTitle("File storage error");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "FILE_STORAGE_ERROR");
 
         return problem;
     }
