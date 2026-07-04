@@ -22,7 +22,6 @@ public class ProductMapper {
         Product product = new Product();
 
         product.setTitle(request.title());
-        product.setImage(request.image());
         product.setStatus(request.status());
 
         return product;

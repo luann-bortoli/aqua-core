@@ -1,8 +1,9 @@
 package dev.luann.backend.modules.product.dto;
 
-import dev.luann.backend.shared.entity.enums.ContentStatus;
+import dev.luann.backend.shared.enums.ContentStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 public record ProductRequest(
 
@@ -12,8 +13,7 @@ public record ProductRequest(
         @NotNull
         ContentStatus status,
 
-        @NotBlank
-        String image
+        @NotNull
+        MultipartFile image
 
-) {
-}
+) {}

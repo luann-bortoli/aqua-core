@@ -4,6 +4,7 @@ import dev.luann.backend.modules.product.dto.ProductPatchRequest;
 import dev.luann.backend.modules.product.dto.ProductRequest;
 import dev.luann.backend.modules.product.dto.ProductResponse;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import dev.luann.backend.shared.file.FileStorageService;
 import dev.luann.backend.shared.pagination.PaginationMapper;
 import dev.luann.backend.shared.pagination.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductMapper mapper;
     private final PaginationMapper paginationMapper;
+    private final FileStorageService fileStorageService;
 
     private Product findProductById(UUID id)
     {
@@ -42,7 +44,10 @@ public class ProductService {
 
     public ProductResponse create(ProductRequest request)
     {
+        String imagePath = fileStorageService.save(request.image());
+
         Product product = mapper.toEntity(request);
+        product.setImage(imagePath);
 
         return mapper.toResponse(repository.save(product));
     }
@@ -51,11 +56,15 @@ public class ProductService {
     {
         Product current = findProductById(id);
 
+        if (request.image() != null)
+        {
+            String imagePath = fileStorageService.save(request.image());
+            current.setImage(imagePath);
+        }
+
         if (request.title() != null) current.setTitle(request.title());
 
         if (request.status() != null) current.setStatus(request.status());
-
-        if (request.image() != null) current.setImage(request.image());
 
         return mapper.toResponse(repository.save(current));
     }
