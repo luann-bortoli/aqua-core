@@ -1,4 +1,4 @@
-type PageResponse<T> = {
+export type PageResponse<T> = {
     content: T[]
     page: number
     size: number
@@ -6,7 +6,7 @@ type PageResponse<T> = {
     totalPages: number
 }
 
-type LoginResponse = {
+export type LoginResponse = {
     id: string
     name: string
     email: string
@@ -14,8 +14,24 @@ type LoginResponse = {
     message: string | null
 }
 
-type UserResponse = {
+export type UserResponse = {
     name: string
     email: string
     role: 'ROLE_ADMIN' | 'ROLE_COLLABORATOR'
+}
+
+export type ResourceStatus =
+    | "ACTIVE"
+    | "INACTIVE"
+    | "DRAFT"
+
+export const ResourceStatusArray: ResourceStatus[] = [
+    "ACTIVE"
+    , "INACTIVE"
+    , "DRAFT"]
+
+export const ResourceStatusLabel = {
+    "ACTIVE": "Ativo",
+    "INACTIVE": "Inativo",
+    "DRAFT": "Rascunho"
 }
