@@ -1,6 +1,7 @@
 package dev.luann.backend.modules.pool;
 
 import dev.luann.backend.modules.pool.dto.PoolRequest;
+import dev.luann.backend.modules.pool.dto.PoolPatchRequest;
 import dev.luann.backend.modules.pool.dto.PoolResponse;
 import dev.luann.backend.shared.pagination.dto.PageResponse;
 import jakarta.validation.Valid;
@@ -45,7 +46,7 @@ public class PoolController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<PoolResponse> patch(
-            @ModelAttribute @Valid PoolRequest request,
+            @ModelAttribute @Valid PoolPatchRequest request,
             @PathVariable UUID id
             ){
         return ResponseEntity.ok(service.patch(request, id));

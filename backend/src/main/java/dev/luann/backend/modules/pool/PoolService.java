@@ -2,6 +2,7 @@ package dev.luann.backend.modules.pool;
 
 import dev.luann.backend.modules.client.Client;
 import dev.luann.backend.modules.pool.dto.PoolRequest;
+import dev.luann.backend.modules.pool.dto.PoolPatchRequest;
 import dev.luann.backend.modules.pool.dto.PoolResponse;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
 import dev.luann.backend.shared.file.FileStorageService;
@@ -53,7 +54,7 @@ public class PoolService
         return mapper.toResponse(repository.save(pool));
     }
 
-    public PoolResponse patch(PoolRequest request, UUID id)
+    public PoolResponse patch(PoolPatchRequest request, UUID id)
     {
         Pool target = findPoolById(id);
 

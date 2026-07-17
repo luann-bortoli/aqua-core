@@ -27,7 +27,8 @@
         width: 400px;
 
         p {
-            color: var(--error-title)
+            color: var(--error-title);
+            text-align: center;
         }
 
         .actionWrapper {

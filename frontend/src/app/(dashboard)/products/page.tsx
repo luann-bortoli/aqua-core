@@ -52,7 +52,11 @@ export default function Products() {
 
             setLoading(true)
             const response = await api.get<PageResponse<Product>>(
-                `/products?page=${pageNumber}&size=${size}`
+                '/products', {
+                params: {
+                    pageNumber: page, size: size
+                }
+            }
             )
             setPageData(response.data)
 
@@ -128,7 +132,6 @@ export default function Products() {
                     </thead>
                     <tbody>
                         {pageData && pageData.content.map((product, index) => {
-                            console.log(product)
                             return (
                                 <tr key={product.id}>
                                     <td>

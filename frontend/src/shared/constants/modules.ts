@@ -50,7 +50,7 @@ export const modules: Module[] = [
     },
     {
         icon: Bell,
-        title: "Notifications",
+        title: "Notificações",
         description: "Envie novas notificações",
         href: "/notifications"
     },

@@ -17,7 +17,7 @@ import { mapApiError } from '@/src/shared/lib/mapApiError'
 import { sleep } from '@/src/shared/utils/async'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
 import { useRequireAuth } from '@/src/shared/hooks/useRequireAuth'
-import { productUpdateSchema, ProductUpdateSchema } from '@/src/shared/schema/product'
+import { productUpdateSchema, ProductUpdateSchema } from '@/src/features/products/schema/product'
 import { ResourceStatusArray, ResourceStatusLabel } from '@/src/shared/types/entity'
 import { useParams } from 'next/navigation'
 

@@ -17,7 +17,7 @@ import { mapApiError } from '@/src/shared/lib/mapApiError'
 import { sleep } from '@/src/shared/utils/async'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
 import { useRequireAuth } from '@/src/shared/hooks/useRequireAuth'
-import { clientUpdateSchema, ClientUpdateSchema } from '@/src/shared/schema/client'
+import { clientUpdateSchema, ClientUpdateSchema } from '@/src/features/clients/schema/client'
 import { StatesArray } from '../page'
 import { useParams } from 'next/navigation'
 import { useHookFormMask } from "use-mask-input";

@@ -11,7 +11,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type, id, text, placeholder, error, fileName, ...props }, ref) => {
+    ({ type, id, text, placeholder, error, fileName, readOnly = false, ...props }, ref) => {
 
         const [showPassword, setShowPassword] = useState(false)
 
@@ -33,8 +33,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                                 : 'password'
                             : type
                     }
-                    placeholder={placeholder}
+                    placeholder={type === "password" ? '••••••••' : placeholder}
                     hidden={type === 'file'}
+                    readOnly={readOnly}
+
                 />
 
                 {type === 'password' && (

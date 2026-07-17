@@ -1,8 +1,6 @@
 package dev.luann.backend.shared.exception.handlers;
 
-import dev.luann.backend.shared.exception.EmailAlreadyExistsException;
-import dev.luann.backend.shared.exception.FileStorageException;
-import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import dev.luann.backend.shared.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -79,6 +77,32 @@ public class GlobalExceptionHandler
         problem.setTitle("Media type not supported");
         problem.setDetail(ex.getMessage());
         problem.setProperty("errorCode", "UNSUPPORTED_MEDIA_TYPE");
+
+        return problem;
+    }
+
+    @ExceptionHandler(NoChangesException.class)
+    public ProblemDetail handleNoChangesException(NoChangesException ex)
+    {
+        ProblemDetail problem =
+                ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+
+        problem.setTitle("No changes");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "NO_CHANGES");
+
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ProblemDetail handleInvalidPasswordException(NoChangesException ex)
+    {
+        ProblemDetail problem =
+                ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+
+        problem.setTitle("Invalid password");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "INVALID_PASSWORD");
 
         return problem;
     }

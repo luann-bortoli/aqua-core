@@ -4,7 +4,7 @@ import SectionTitle from '@/src/shared/components/layout/SectionTitle/SectionTit
 import s from './page.module.css'
 import Input from '@/src/shared/components/ui/input/Input'
 import { useForm } from 'react-hook-form'
-import { userSchema, UserSchema } from '@/src/shared/schema/user'
+import { userSchema, UserSchema } from '@/src/features/users/schema/user'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputError from '@/src/shared/components/feedback/input-error/InputError'
 import Select from '@/src/shared/components/ui/select/Select'

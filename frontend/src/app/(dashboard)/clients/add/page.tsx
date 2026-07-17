@@ -17,7 +17,7 @@ import { mapApiError } from '@/src/shared/lib/mapApiError'
 import { sleep } from '@/src/shared/utils/async'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
 import { useRequireAuth } from '@/src/shared/hooks/useRequireAuth'
-import { clientSchema, ClientSchema } from '@/src/shared/schema/client'
+import { clientSchema, ClientSchema } from '@/src/features/clients/schema/client'
 import { StatesArray } from '../page'
 import { useHookFormMask } from 'use-mask-input'
 
@@ -139,7 +139,6 @@ export default function AddClient() {
                         type='password'
                         id='password'
                         text='Senha'
-                        placeholder='••••••••'
                         error={errors.password?.message}
                     />
                     {errors.password && <InputError message={errors.password?.message} />}

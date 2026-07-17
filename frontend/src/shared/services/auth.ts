@@ -1,5 +1,5 @@
 import { api } from "../lib/api";
-import { LoginSchema } from "../schema/login";
+import { LoginSchema } from "../../features/auth/login/login";
 
 export function login(data: LoginSchema) {
     return api.post("/auth/login", data);

@@ -11,8 +11,9 @@ public class NotificationMapper
     public NotificationResponse toResponse(Notification notification)
     {
         return new NotificationResponse(
-                notification.title,
-                notification.description
+                notification.getId(),
+                notification.getTitle(),
+                notification.getDescription()
         );
     }
 

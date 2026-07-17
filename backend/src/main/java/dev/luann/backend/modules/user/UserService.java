@@ -70,22 +70,6 @@ public class UserService
 
         User current = findUserById(id);
 
-        if (request.email() != null)
-        {
-            String targetEmail = normalizeEmail(request.email());
-            String currentEmail = normalizeEmail(current.getEmail());
-
-            if (
-                    !currentEmail.equalsIgnoreCase(targetEmail) &&
-                            repository.existsByEmail(targetEmail)
-            )
-            {
-                throw new EmailAlreadyExistsException("User", targetEmail);
-            }
-
-            current.setEmail(targetEmail);
-        }
-
         if (request.name() != null)
         {
             current.setName(request.name());
@@ -93,10 +77,6 @@ public class UserService
 
         if (request.role() != null) {
             current.setRole(request.role());
-        }
-
-        if (request.password() != null) {
-            current.setPassword(encoder.encode(request.password()));
         }
 
         return  mapper.toResponse(repository.save(current));

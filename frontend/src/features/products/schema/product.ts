@@ -1,4 +1,4 @@
-import { ResourceStatusArray } from '../types/entity'
+import { ResourceStatusArray } from '../../../shared/types/entity'
 
 import { z } from 'zod'
 

@@ -19,7 +19,7 @@ const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
         const [showPassword, setShowPassword] = useState(false)
 
         return (
-            <div className={s.inputField}>
+            <div className={s.inputField} >
                 <input
                     {...props}
                     ref={ref}
@@ -31,7 +31,7 @@ const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
                                 : 'password'
                             : type
                     }
-                    placeholder={placeholder}
+                    placeholder={type === 'password' ? "••••••••" : placeholder}
                 />
 
                 <label htmlFor={id}>
@@ -47,7 +47,7 @@ const AuthInput = forwardRef<HTMLInputElement, AuthInputProps>(
                         {showPassword ? <Eye /> : <EyeOff />}
                     </button>
                 )}
-            </div>
+            </div >
         )
     }
 )
