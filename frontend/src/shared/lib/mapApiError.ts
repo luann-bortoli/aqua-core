@@ -1,6 +1,10 @@
+import { ErrorCode } from "../types/error"
+
 export function mapApiError(error: any): string {
 
-    switch (error.errorCode ?? error.status)
+    const errorId: ErrorCode = error.Code ?? error.status
+
+    switch (errorId)
     {
         case "AUTH_BAD_CREDENTIALS":
             return "Email ou senha inválidos."
@@ -23,8 +27,11 @@ export function mapApiError(error: any): string {
         case "UNSUPPORTED_MEDIA_TYPE":
             return "Arquivo não suportado."
 
-        case 400:
-            return "Solicitação inválida."
+        case "NO_CHANGES":
+            return "Nenhuma alteração foi informada."
+
+        case "INVALID_PASSWORD":
+            return "Senha inválida."
 
         default:
             return "Erro inesperado."

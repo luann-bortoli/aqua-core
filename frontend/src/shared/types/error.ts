@@ -4,7 +4,10 @@ export type ErrorCode =
     | "ACCESS_DENIED"
     | "METHOD_ARGUMENT_INVALID"
     | "EMAIL_ALREADY_EXISTS"
-    | "RESOURCE_NOT_FOUND";
+    | "RESOURCE_NOT_FOUND"
+    | "UNSUPPORTED_MEDIA_TYPE"
+    | "NO_CHANGES"
+    | "INVALID_PASSWORD"
 
 export interface ApiError {
     status: number;
