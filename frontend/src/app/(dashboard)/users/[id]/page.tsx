@@ -57,7 +57,11 @@ export default function UpdateUser() {
 
         try
         {
-            await api.patch(`/users/${param.id}`, data)
+
+            await api.patch(`/users/${param.id}`, {
+                name: data.name,
+                role: data.role
+            })
             setSuccess(true)
 
         } catch (error) 
@@ -98,10 +102,8 @@ export default function UpdateUser() {
                         type='email'
                         id='email'
                         text='E-mail'
-                        placeholder='dave@gmail.com'
-                        error={errors.email?.message}
+                        readOnly={true}
                     />
-                    {errors.email && <InputError message={errors.email?.message} />}
                 </div>
 
                 <div className={s.inputField}>
