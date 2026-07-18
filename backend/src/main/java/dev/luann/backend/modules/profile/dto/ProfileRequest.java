@@ -7,7 +7,6 @@ import java.util.UUID;
 
 public record ProfileRequest(
 
-        UUID id,
         // Accepts null, blank and values with 3+ characters
         @Pattern(regexp = "^$|^.{3,}$")
         String newName,
