@@ -16,6 +16,7 @@ import Input from '@/src/shared/components/ui/input/Input'
 import SubmitButton from '@/src/shared/components/ui/submit-button/SubmitButton'
 import PasswordConfirmation from '@/src/shared/components/feedback/password-confirmation/PasswordConfirmation'
 import { api } from '@/src/shared/lib/api'
+import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
 
 type Profile = {
     id: string
@@ -31,6 +32,7 @@ export default function Profile() {
 
     const [error, setError] = useState<ApiError | null>(null)
     const [confirmation, setConfirmation] = useState(false)
+    const [success, setSuccess] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const [formData, setFormData] = useState<ProfileSchema | null>(null)
@@ -115,6 +117,13 @@ export default function Profile() {
                     message={mapApiError(error)}
                     onClose={() => setError(null)}
                 />}
+
+            {success &&
+                <GlobalSuccess
+                    message={'Informações alteradas.'}
+                    onClose={() => setSuccess(false)}
+                />
+            }
 
             <div className={s.mainWrapper}>
                 <SectionTitle target='/profile' />
