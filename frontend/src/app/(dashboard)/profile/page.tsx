@@ -78,8 +78,8 @@ export default function Profile() {
 
             setLoading(true);
 
-            await api.patch("/users/me", {
-                name: formData.name,
+            await api.patch("/profile", {
+                newName: formData.name,
                 newPassword: formData.newPassword,
                 currentPassword
             })
@@ -88,7 +88,7 @@ export default function Profile() {
 
         } catch (err)
         {
-
+            console.log(err)
             setError(err as ApiError);
 
         } finally
