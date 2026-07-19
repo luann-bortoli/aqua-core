@@ -2,6 +2,7 @@ import { modules } from '@/src/shared/constants/modules'
 import s from './SectionTitle.module.css'
 import Link from 'next/link'
 import { ArrowLeft, Plus } from 'lucide-react'
+import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
 
 type Props = {
     target?:
@@ -21,6 +22,8 @@ type Props = {
 export default function SectionTitle({ target, title, description }: Props) {
 
     const section = modules.find(module => module.href === target)
+
+    const user = useCurrentUser()
 
     if (!section) return null
 
@@ -42,6 +45,7 @@ export default function SectionTitle({ target, title, description }: Props) {
 
                     {
                         !title &&
+                        user?.role === "ROLE_ADMIN" &&
                         target !== "/dashboard" &&
                         target !== "/profile" && (
                             <Link className={s.addWrapper} href={`${target}/add`}>

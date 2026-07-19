@@ -15,6 +15,7 @@ import Confirmation from '@/src/shared/components/feedback/confirmation/Confirma
 import Link from 'next/link'
 import { PageResponse, ResourceStatus } from '@/src/shared/types/entity'
 import StatusCard from '@/src/shared/components/ui/status-card/StatusCard'
+import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -32,6 +33,8 @@ type TargetPool = {
 }
 
 export default function Pools() {
+
+    const user = useCurrentUser()
 
     useRequireAuth()
 
@@ -125,7 +128,8 @@ export default function Pools() {
                             <th>Imagem</th>
                             <th>Nome</th>
                             <th>Status</th>
-                            <th>Ações</th>
+                            {user?.role == "ROLE_ADMIN" &&
+                                <th>Ações</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -139,10 +143,11 @@ export default function Pools() {
                                     </td>
                                     <td>{pool.title}</td>
                                     <td><StatusCard status={pool.status} /></td>
-                                    <td>
-                                        <Link href={`pools/${pool.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
-                                        <button className={s.action} onClick={() => grabTargetPool(pool.id, pool.title)}>{<Trash size={20} />}</button>
-                                    </td>
+                                    {user?.role == "ROLE_ADMIN" &&
+                                        <td>
+                                            <Link href={`pools/${pool.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
+                                            <button className={s.action} onClick={() => grabTargetPool(pool.id, pool.title)}>{<Trash size={20} />}</button>
+                                        </td>}
                                 </tr>
                             )
                         })}

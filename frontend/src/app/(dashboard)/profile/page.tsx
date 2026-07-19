@@ -87,6 +87,7 @@ export default function Profile() {
             })
 
             setConfirmation(false);
+            setSuccess(true)
 
         } catch (err)
         {

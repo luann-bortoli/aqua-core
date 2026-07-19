@@ -15,6 +15,7 @@ import Confirmation from '@/src/shared/components/feedback/confirmation/Confirma
 import Link from 'next/link'
 import { PageResponse, ResourceStatus } from '@/src/shared/types/entity'
 import StatusCard from '@/src/shared/components/ui/status-card/StatusCard'
+import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -96,6 +97,8 @@ export default function Products() {
         fetchProducts(page)
     }, [page])
 
+    const user = useCurrentUser()
+
     return (
         <>
             {error &&
@@ -127,7 +130,8 @@ export default function Products() {
                             <th>Imagem</th>
                             <th>Nome</th>
                             <th>Status</th>
-                            <th>Ações</th>
+                            {user?.role == "ROLE_ADMIN" &&
+                                <th>Ações</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -140,10 +144,11 @@ export default function Products() {
                                     </td>
                                     <td>{product.title}</td>
                                     <td><StatusCard status={product.status} /></td>
-                                    <td>
-                                        <Link href={`products/${product.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
-                                        <button className={s.action} onClick={() => grabTargetProduct(product.id, product.title)}>{<Trash size={20} />}</button>
-                                    </td>
+                                    {user?.role == "ROLE_ADMIN" &&
+                                        <td>
+                                            <Link href={`products/${product.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
+                                            <button className={s.action} onClick={() => grabTargetProduct(product.id, product.title)}>{<Trash size={20} />}</button>
+                                        </td>}
                                 </tr>
                             )
                         })}

@@ -14,8 +14,9 @@ import GlobalSuccess from '@/src/shared/components/feedback/global-succes/Global
 import Confirmation from '@/src/shared/components/feedback/confirmation/Confirmation'
 import Link from 'next/link'
 import { PageResponse } from '@/src/shared/types/entity'
+import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
 
-export const StatesArray = [
+export const StatesArray: States[] = [
     "AC", "AL", "AP"
     , "AM", "BA", "CE"
     , "DF", "ES", "GO"
@@ -57,6 +58,8 @@ type TargetClient = {
 }
 
 export default function Clients() {
+
+    const user = useCurrentUser()
 
     useRequireAuth()
 
@@ -149,7 +152,9 @@ export default function Clients() {
                             <th>Email</th>
                             <th>Local</th>
                             <th>Telefone</th>
-                            <th>Ações</th>
+                            {user?.role == "ROLE_ADMIN" &&
+                                <th>Ações</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -160,10 +165,11 @@ export default function Clients() {
                                     <td>{client.email}</td>
                                     <td>{client.address.state + " - " + client.address.city}</td>
                                     <td>{client.phone}</td>
-                                    <td>
-                                        <Link href={`clients/${client.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
-                                        <button className={s.action} onClick={() => grabTargetClient(client.id, client.name)}>{<Trash size={20} />}</button>
-                                    </td>
+                                    {user?.role == "ROLE_ADMIN" &&
+                                        <td>
+                                            <Link href={`clients/${client.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
+                                            <button className={s.action} onClick={() => grabTargetClient(client.id, client.name)}>{<Trash size={20} />}</button>
+                                        </td>}
                                 </tr>
                             )
                         })}

@@ -15,6 +15,7 @@ import Confirmation from '@/src/shared/components/feedback/confirmation/Confirma
 import Link from 'next/link'
 import { PageResponse, ResourceStatus } from '@/src/shared/types/entity'
 import StatusCard from '@/src/shared/components/ui/status-card/StatusCard'
+import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -94,6 +95,8 @@ export default function Notifications() {
         fetchNotifications(page)
     }, [page])
 
+    const user = useCurrentUser()
+
     return (
         <>
             {error &&
@@ -124,7 +127,8 @@ export default function Notifications() {
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
-                            <th>Ações</th>
+                            {user?.role == "ROLE_ADMIN" &&
+                                <th>Ações</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -133,10 +137,11 @@ export default function Notifications() {
                                 <tr key={notification.id}>
                                     <td>{notification.title}</td>
                                     <td>{notification.description}</td>
-                                    <td>
-                                        <Link href={`notifications/${notification.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
-                                        <button className={s.action} onClick={() => grabTargetNotification(notification.id, notification.title)}>{<Trash size={20} />}</button>
-                                    </td>
+                                    {user?.role == "ROLE_ADMIN" &&
+                                        <td>
+                                            <Link href={`notifications/${notification.id}`} className={s.action} >{<SquarePen size={20} />}</Link>
+                                            <button className={s.action} onClick={() => grabTargetNotification(notification.id, notification.title)}>{<Trash size={20} />}</button>
+                                        </td>}
                                 </tr>
                             )
                         })}
