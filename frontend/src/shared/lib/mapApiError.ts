@@ -2,7 +2,7 @@ import { ErrorCode } from "../types/error"
 
 export function mapApiError(error: any): string {
 
-    const errorId: ErrorCode = error.Code ?? error.status
+    const errorId: ErrorCode | number = error.Code ?? error.status
 
     switch (errorId)
     {
@@ -19,9 +19,11 @@ export function mapApiError(error: any): string {
             return "Recurso não encontrado."
 
         case "ACCESS_DENIED":
+        case 403:
             return "Você não possui as permissões necessárias."
 
         case "AUTH_FAILED":
+        case 401:
             return "Autenticação falhou."
 
         case "UNSUPPORTED_MEDIA_TYPE":
