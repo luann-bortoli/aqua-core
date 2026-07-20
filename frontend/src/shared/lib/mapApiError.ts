@@ -35,6 +35,9 @@ export function mapApiError(error: any): string {
         case "INVALID_PASSWORD":
             return "Senha inválida."
 
+        case "DEPENDENT_RESOURCES":
+            return "Não é possível excluir este recurso porque existem registros vinculados a ele."
+
         default:
             return "Erro inesperado."
     }

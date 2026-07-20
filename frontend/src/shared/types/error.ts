@@ -8,6 +8,7 @@ export type ErrorCode =
     | "UNSUPPORTED_MEDIA_TYPE"
     | "NO_CHANGES"
     | "INVALID_PASSWORD"
+    | "DEPENDENT_RESOURCES"
 
 export interface ApiError {
     status: number;
