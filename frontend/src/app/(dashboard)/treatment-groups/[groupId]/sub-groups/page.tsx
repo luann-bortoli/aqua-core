@@ -144,7 +144,7 @@ export default function TreatmentSubGroups() {
                     title={groupLoading ? 'Carregando' : groupData ? groupData.name : 'Sub-grupos dos tratamentos.'}
                     description='Gerencie os sub-grupos dos tratamentos cadastrados'
                     showCreateButton={true}
-                    customPush={`${currentPath}/add`}
+                    customPush={`sub-groups/add`}
                 />
 
                 <table className={s.table}>
@@ -159,11 +159,17 @@ export default function TreatmentSubGroups() {
                         {pageData && pageData.content.map((treatmentSubGroup) => {
                             return (
                                 <tr key={treatmentSubGroup.id}>
-                                    <td>{treatmentSubGroup.name}</td>
-                                    {user?.role == "ROLE_ADMIN" &&
+                                    <td>
+                                        <Link
+                                            href={`sub-groups/${treatmentSubGroup.id}/treatment`}>
+                                            {treatmentSubGroup.name}
+                                        </Link>
+                                    </td>
+                                    {
+                                        user?.role == "ROLE_ADMIN" &&
                                         <td>
                                             <Link
-                                                href={`treatment-sub-groups/${treatmentSubGroup.id}`}
+                                                href={`sub-groups/${treatmentSubGroup.id}`}
                                                 className={s.action} >
                                                 {<SquarePen size={20} />}
                                             </Link>
@@ -173,7 +179,8 @@ export default function TreatmentSubGroups() {
                                                 onClick={() => grabTargetTreatmentSubGroup(treatmentSubGroup.id, treatmentSubGroup.name)}>
                                                 {<Trash size={20} />}
                                             </button>
-                                        </td>}
+                                        </td>
+                                    }
                                 </tr>
                             )
                         })}
@@ -199,7 +206,7 @@ export default function TreatmentSubGroups() {
                         <ChevronRight />
                     </button>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
