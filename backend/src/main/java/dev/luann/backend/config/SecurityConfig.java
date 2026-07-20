@@ -62,7 +62,6 @@ public class SecurityConfig
 
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/users/**",
                                 "/clients/**",
                                 "/products/**",
                                 "/pools/**",
