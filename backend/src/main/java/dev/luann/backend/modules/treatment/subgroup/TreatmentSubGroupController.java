@@ -66,11 +66,11 @@ public class TreatmentSubGroupController
         return ResponseEntity.ok(service.patch(request, id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
-            @Valid @RequestBody UUID request)
+            @PathVariable UUID id)
     {
-        service.delete(request);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
