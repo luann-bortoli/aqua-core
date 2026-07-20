@@ -75,6 +75,7 @@ export default function TreatmentGroup() {
             setSuccess(true)
         } catch (error)
         {
+            setTargetTreatmentGroup(null)
             setError(normalizeCatchError(error))
         }
     }
