@@ -95,7 +95,10 @@ export default function Users() {
             {targetUser && <Confirmation loading={loading} message={`Deseja excluir o usuário ${targetUser?.name}?`} onConfirm={() => deleteUser(targetUser?.id)} onCancel={() => setTargetUser(null)} />}
 
             <div className={s.mainWrapper}>
-                <SectionTitle target='/users' />
+                <SectionTitle
+                    target='/users'
+                    showCreateButton={true}
+                />
 
                 <table className={s.table}>
                     <thead>

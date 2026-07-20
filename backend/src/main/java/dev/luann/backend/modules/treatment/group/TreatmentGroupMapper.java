@@ -11,8 +11,7 @@ public class TreatmentGroupMapper
     {
         return new TreatmentGroupResponse(
                 treatmentGroup.getId(),
-                treatmentGroup.getName(),
-                treatmentGroup.getSubGroups()
+                treatmentGroup.getName()
         );
     }
 

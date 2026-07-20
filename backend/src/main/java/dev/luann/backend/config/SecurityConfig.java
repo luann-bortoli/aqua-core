@@ -66,7 +66,7 @@ public class SecurityConfig
                                 "/clients/**",
                                 "/products/**",
                                 "/pools/**",
-                                "treatments/**",
+                                "/treatments/**",
                                 "/notifications/**"
                                 )
                         .permitAll()
@@ -76,7 +76,7 @@ public class SecurityConfig
                                 "/clients/**",
                                 "/products/**",
                                 "/pools/**",
-                                "treatments/**",
+                                "/treatments/**",
                                 "/notifications/**"
                                 )
                         .hasAuthority("ROLE_ADMIN")

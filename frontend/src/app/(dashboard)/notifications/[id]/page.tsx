@@ -21,7 +21,7 @@ import { notificationSchema, NotificationSchema } from '@/src/features/notificat
 import { useParams } from 'next/navigation'
 
 
-export default function AddNotification() {
+export default function UpdateNotification() {
 
     const [formError, setFormError] = useState<ApiError | null>(null)
     const [success, setSuccess] = useState<boolean>(false)

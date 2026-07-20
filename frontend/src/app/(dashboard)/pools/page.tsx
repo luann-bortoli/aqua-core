@@ -120,7 +120,10 @@ export default function Pools() {
                 />}
 
             <div className={s.mainWrapper}>
-                <SectionTitle target='/pools' />
+                <SectionTitle
+                    target='/pools'
+                    showCreateButton={true}
+                />
 
                 <table className={s.table}>
                     <thead>

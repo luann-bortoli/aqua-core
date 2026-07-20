@@ -37,7 +37,6 @@ public class TreatmentGroupController
         return ResponseEntity.ok(service.findAll(pageable));
     }
 
-    @Transactional
     @PostMapping
     public ResponseEntity<TreatmentGroupResponse> create(
             @Valid @RequestBody TreatmentGroupRequest request)
@@ -47,7 +46,6 @@ public class TreatmentGroupController
                 .body(service.create(request));
     }
 
-    @Transactional
     @PatchMapping("/{id}")
     public ResponseEntity<TreatmentGroupResponse> patch(
             @Valid @RequestBody TreatmentGroupRequest request,
@@ -56,7 +54,6 @@ public class TreatmentGroupController
         return ResponseEntity.ok(service.patch(request, id));
     }
 
-    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable UUID id)

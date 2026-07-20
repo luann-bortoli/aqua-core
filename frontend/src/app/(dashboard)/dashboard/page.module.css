@@ -25,7 +25,6 @@ body {
         background-color: var(--card);
         outline: solid 1px var(--card-outline);
         border-radius: 6px;
-        transition: 200ms ease;
 
         &:hover {
             cursor: pointer;

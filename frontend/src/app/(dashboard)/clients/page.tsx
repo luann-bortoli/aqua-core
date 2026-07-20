@@ -143,7 +143,10 @@ export default function Clients() {
                 />}
 
             <div className={s.mainWrapper}>
-                <SectionTitle target='/clients' />
+                <SectionTitle
+                    target='/clients'
+                    showCreateButton={true}
+                />
 
                 <table className={s.table}>
                     <thead>

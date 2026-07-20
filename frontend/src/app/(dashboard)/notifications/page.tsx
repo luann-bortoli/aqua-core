@@ -120,7 +120,10 @@ export default function Notifications() {
                 />}
 
             <div className={s.mainWrapper}>
-                <SectionTitle target='/notifications' />
+                <SectionTitle
+                    target='/notifications'
+                    showCreateButton={true}
+                />
 
                 <table className={s.table}>
                     <thead>

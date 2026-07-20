@@ -3,6 +3,7 @@ import s from './SectionTitle.module.css'
 import Link from 'next/link'
 import { ArrowLeft, Plus } from 'lucide-react'
 import { useCurrentUser } from '@/src/shared/hooks/useCurrentUser'
+import { useRouter } from 'next/navigation'
 
 type Props = {
     target?:
@@ -11,15 +12,24 @@ type Props = {
     | "/clients"
     | "/products"
     | "/pools"
-    | "/treatments"
+    | "/treatment-groups"
     | "/notifications"
     | "/profile"
 
     title?: string
     description?: string
+    showCreateButton?: boolean
+    customPush?: string
 }
 
-export default function SectionTitle({ target, title, description }: Props) {
+export default function SectionTitle
+    ({
+        target, title, description,
+        showCreateButton = false,
+        customPush = undefined
+    }: Props) {
+
+    const router = useRouter()
 
     const section = modules.find(module => module.href === target)
 
@@ -44,19 +54,18 @@ export default function SectionTitle({ target, title, description }: Props) {
                 <div className={s.actionWrapper}>
 
                     {
-                        !title &&
-                        user?.role === "ROLE_ADMIN" &&
-                        target !== "/dashboard" &&
-                        target !== "/profile" && (
-                            <Link className={s.addWrapper} href={`${target}/add`}>
+                        showCreateButton &&
+                        user?.role === "ROLE_ADMIN" && (
+                            <Link className={s.addWrapper} href={customPush ?? `${target}/add`}>
                                 <p>Cadastrar</p> <Plus size={20} />
                             </Link>
                         )}
 
+
                     {target !== "/dashboard" && (
-                        <Link className={s.addWrapper} href="/dashboard">
+                        <button className={s.addWrapper} onClick={() => title ? router.back() : router.push("/dashboard")} >
                             <p>Voltar</p> <ArrowLeft size={20} />
-                        </Link>
+                        </button>
                     )}
 
                 </div>

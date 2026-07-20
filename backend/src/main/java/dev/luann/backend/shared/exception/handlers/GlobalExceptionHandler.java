@@ -106,4 +106,18 @@ public class GlobalExceptionHandler
 
         return problem;
     }
+
+    @ExceptionHandler(DependentResourcesException.class)
+    public ProblemDetail handleDependentResourcesException(DependentResourcesException ex)
+    {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+
+        problem.setTitle("Dependent Resources");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "DEPENDENT_RESOURCES");
+        problem.setProperty("resource", ex.getResource());
+        problem.setProperty("dependency", ex.getDependency());
+
+        return problem;
+    }
 }

@@ -1,6 +1,5 @@
 import { LucideIcon } from "lucide-react"
 import { Bell, Droplet, LayoutGrid, Package, RefreshCw, User, UserCog, Users, } from 'lucide-react'
-import { Url } from "next/dist/shared/lib/router/router"
 
 type Module = {
     icon: LucideIcon
@@ -46,7 +45,7 @@ export const modules: Module[] = [
         icon: RefreshCw,
         title: "Tratamentos",
         description: "Gerencie os tratamentos cadastrados",
-        href: "/treatments"
+        href: "/treatment-groups"
     },
     {
         icon: Bell,

@@ -122,7 +122,10 @@ export default function Products() {
                 />}
 
             <div className={s.mainWrapper}>
-                <SectionTitle target='/products' />
+                <SectionTitle
+                    target='/products'
+                    showCreateButton={true}
+                />
 
                 <table className={s.table}>
                     <thead>

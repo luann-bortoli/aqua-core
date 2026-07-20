@@ -21,7 +21,7 @@ import { useRequireAuth } from '@/src/shared/hooks/useRequireAuth'
 import { notificationSchema, NotificationSchema } from '@/src/features/notifications/schema/notification'
 
 
-export default function UpdateNotification() {
+export default function AddNotification() {
 
     const [formError, setFormError] = useState<ApiError | null>(null)
     const [success, setSuccess] = useState<boolean>(false)

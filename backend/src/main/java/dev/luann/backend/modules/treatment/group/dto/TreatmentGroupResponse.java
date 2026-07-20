@@ -9,8 +9,7 @@ public record TreatmentGroupResponse
         (
 
         UUID id,
-        String name,
-        List<TreatmentSubGroup> subGroups
+        String name
 )
 {
 }

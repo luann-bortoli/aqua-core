@@ -1,0 +1,88 @@
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    padding: 32px;
+    background-color: var(--background);
+
+    table {
+        border-radius: 2px;
+        border-collapse: collapse;
+
+        thead {
+            padding: 8px;
+            outline: solid 1px var(--table-border);
+            background-color: var(--table-header-background);
+            color: var(--table-header-text);
+
+            th {
+                width: 20%;
+                text-align: start;
+                padding: 16px;
+            }
+        }
+
+        tbody {
+            font-size: 14px;
+            cursor: pointer;
+
+
+            tr {
+                &:nth-child(even) {
+                    background-color: var(--table-row-alt);
+                }
+
+                td {
+                    border-bottom: 1px solid var(--table-border);
+                    padding: 8px 16px;
+                    color: var(--table-text);
+
+                    .action {
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                        cursor: pointer;
+
+                        &:first-child {
+                            margin: 0 16px 0 0;
+                        }
+                    }
+
+                    .imageContainer {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        height: 96px;
+                        aspect-ratio: 1/1;
+                        border-radius: 4px;
+
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+
+        margin: 16px 0 0 0;
+
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            margin: 0 16px;
+            cursor: pointer;
+        }
+    }
+}
