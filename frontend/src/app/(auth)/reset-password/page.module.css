@@ -1,0 +1,90 @@
+.bodyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100%;
+
+    background-color: var(--background);
+
+    .cardContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        height: 517px;
+        width: 427px;
+
+        padding: 64px 84px;
+        border-radius: 6px;
+        background-color: var(--card);
+        outline: solid 1px var(--card-outline);
+
+        .title {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin: 32px 0 0 0;
+        }
+
+        .desc {
+            text-align: center;
+            color: var(--text-secondary);
+            margin: 8px 0 32px 0;
+            font-size: 14px;
+        }
+
+        .inputWrapper {
+            width: 100%;
+            margin: 0 0 16px 0;
+
+            input {
+                width: 100%;
+            }
+
+            a {
+                font-size: 13px;
+                color: #777777;
+
+                &:hover {
+                    color: var(--text-primary);
+                }
+            }
+        }
+
+        .submitButton {
+            background-color: var(--background-dark);
+            color: var(--text-primary-dark);
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 8px 0 0 0;
+        }
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            background-color: var(--text-secondary);
+            color: var(--text-primary-dark);
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 8px 0 0 0;
+        }
+
+        .copyright {
+            font-size: 12px;
+            margin: 16px 0;
+        }
+    }
+}
