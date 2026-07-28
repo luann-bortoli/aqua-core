@@ -1,0 +1,17 @@
+package dev.luann.backend.modules.passwordReset.dto;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record ResetPasswordRequest(
+
+        @NotBlank
+        String token,
+
+        @NotBlank
+        @Size(min = 8)
+        String newPassword
+
+) {
+}

@@ -1,11 +1,17 @@
 package dev.luann.backend.modules.passwordReset;
 
+import dev.luann.backend.modules.auth.utils.HashUtils;
+import dev.luann.backend.modules.email.EmailService;
 import dev.luann.backend.modules.email.EmailServiceImpl;
+import dev.luann.backend.modules.passwordReset.exception.InvalidTokenException;
+import dev.luann.backend.modules.passwordReset.exception.enums.InvalidTokenReason;
 import dev.luann.backend.modules.user.User;
 import dev.luann.backend.modules.user.UserRepository;
 import dev.luann.backend.shared.exception.ResourceNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -18,14 +24,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PasswordResetService
 {
-
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
-    private final EmailServiceImpl emailService;
-
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
     private final PasswordResetRepository repository;
 
-    void forgotPassword(String email){
+    public void forgotPassword(String email){
 
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
@@ -43,7 +47,7 @@ public class PasswordResetService
                 .withoutPadding()
                 .encodeToString(bytes);
 
-        String tokenHash = encoder.encode(token);
+        String tokenHash = HashUtils.sha256(token);
 
         PasswordResetToken newToken = new PasswordResetToken(
                 UUID.randomUUID(),
@@ -63,6 +67,26 @@ public class PasswordResetService
 
     }
 
-    void resetPassword(String token, String newPassword){}
+    @Transactional
+    public void resetPassword(String token, String newPassword){
+
+        String tokenHash = HashUtils.sha256(token);
+
+        PasswordResetToken resetToken = repository
+                .findByTokenHash(tokenHash)
+                .orElseThrow(() -> new ResourceNotFoundException("ResetToken", "providedToken"));
+
+        if (resetToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new InvalidTokenException(InvalidTokenReason.expired);
+        }
+
+        User target = resetToken.getUser();
+
+        target.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(target);
+
+        repository.delete(resetToken);
+    }
 
 }

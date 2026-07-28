@@ -1,5 +1,6 @@
 package dev.luann.backend.shared.exception.handlers;
 
+import dev.luann.backend.modules.passwordReset.exception.InvalidTokenException;
 import dev.luann.backend.shared.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -117,6 +118,19 @@ public class GlobalExceptionHandler
         problem.setProperty("errorCode", "DEPENDENT_RESOURCES");
         problem.setProperty("resource", ex.getResource());
         problem.setProperty("dependency", ex.getDependency());
+
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ProblemDetail handleInvalidTokenException(InvalidTokenException ex)
+    {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+
+        problem.setTitle("Invalid token");
+        problem.setDetail(ex.getMessage());
+        problem.setProperty("errorCode", "INVALID_TOKEN");
+        problem.setProperty("reason", ex.getReason());
 
         return problem;
     }
