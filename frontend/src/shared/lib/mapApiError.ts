@@ -2,7 +2,7 @@ import { ErrorCode } from "../types/error"
 
 export function mapApiError(error: any): string {
 
-    const errorId: ErrorCode | number = error.Code ?? error.status
+    const errorId: ErrorCode | number = error.errorCode ?? error.status
 
     switch (errorId)
     {
