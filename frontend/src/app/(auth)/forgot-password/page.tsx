@@ -10,10 +10,15 @@ import { LockKeyhole } from 'lucide-react'
 import { forgotPasswordSchema, ForgotPasswordSchema } from './_features/schema/forgot-password.schema'
 import { useState } from 'react'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
+import { api } from '@/src/shared/lib/api'
+import { normalizeCatchError } from '@/src/shared/utils/mapper'
+import { ApiError } from '@/src/shared/types/error'
+import GlobalError from '@/src/shared/components/feedback/global-error/GlobalError'
 
 export default function forgotPassword() {
 
     const [success, setSuccess] = useState(false)
+    const [error, setError] = useState<ApiError | null>(null)
 
     const {
         register,
@@ -29,7 +34,17 @@ export default function forgotPassword() {
     })
 
     const onSubmit = async (data: ForgotPasswordSchema) => {
-        setSuccess(true)
+
+        try { 
+            await api.post("/forgot-password", data.email)
+            setSuccess(true)
+        }
+
+        catch (err) 
+        {
+            const apiError = normalizeCatchError(err)
+            setError(apiError)
+        }
     };
 
     return (
@@ -40,6 +55,11 @@ export default function forgotPassword() {
                     message={`Link enviado com sucesso.`}
                     onClose={() => setSuccess(false)}
                 />}
+
+                {error && <GlobalError 
+                    message={"Link para redefinição de senha enviado."} 
+                    onClose={() => setError(null)}
+                    />}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
 
