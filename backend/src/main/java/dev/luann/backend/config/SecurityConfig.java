@@ -54,35 +54,37 @@ public class SecurityConfig
 
                 .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(
-                                "/auth/login",
-                                "/auth/logout"
-                                )
-                        .permitAll()
+            .requestMatchers(
+                    "/auth/login",
+                    "/auth/logout",
+                    "/auth/forgot-password",
+                    "/auth/reset-password"
+            )
+            .permitAll()
 
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/clients/**",
-                                "/products/**",
-                                "/pools/**",
-                                "/treatments/**",
-                                "/notifications/**"
-                                )
-                        .permitAll()
+            .requestMatchers(
+                    HttpMethod.GET,
+                    "/clients/**",
+                    "/products/**",
+                    "/pools/**",
+                    "/treatments/**",
+                    "/notifications/**"
+            )
+            .permitAll()
 
-                        .requestMatchers(
-                                "/users/**",
-                                "/clients/**",
-                                "/products/**",
-                                "/pools/**",
-                                "/treatments/**",
-                                "/notifications/**"
-                                )
-                        .hasAuthority("ROLE_ADMIN")
+            .requestMatchers(
+                    "/users/**",
+                    "/clients/**",
+                    "/products/**",
+                    "/pools/**",
+                    "/treatments/**",
+                    "/notifications/**"
+            )
+            .hasAuthority("ROLE_ADMIN")
 
-                        .anyRequest()
-                        .authenticated()
-                )
+            .anyRequest()
+            .authenticated()
+    )
 
                 .formLogin(form -> form.disable())
 

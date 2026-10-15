@@ -29,6 +29,7 @@ public class PasswordResetService
     private final PasswordEncoder passwordEncoder;
     private final PasswordResetRepository repository;
 
+    @Transactional
     public void forgotPassword(String email){
 
         Optional<User> optionalUser = userRepository.findByEmail(email);
@@ -50,7 +51,7 @@ public class PasswordResetService
         String tokenHash = HashUtils.sha256(token);
 
         PasswordResetToken newToken = new PasswordResetToken(
-                UUID.randomUUID(),
+                null,
                 tokenHash,
                 LocalDateTime.now().plusMinutes(15),
                 target

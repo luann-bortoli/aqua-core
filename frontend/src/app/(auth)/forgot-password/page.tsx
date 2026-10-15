@@ -15,8 +15,7 @@ import { normalizeCatchError } from '@/src/shared/utils/mapper'
 import { ApiError } from '@/src/shared/types/error'
 import GlobalError from '@/src/shared/components/feedback/global-error/GlobalError'
 
-export default function forgotPassword() {
-
+export default function ForgotPassword() {
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState<ApiError | null>(null)
 
@@ -30,69 +29,82 @@ export default function forgotPassword() {
         }
     } = useForm<ForgotPasswordSchema>({
         resolver: zodResolver(forgotPasswordSchema),
-        mode: "onChange"
+        mode: 'onChange'
     })
 
     const onSubmit = async (data: ForgotPasswordSchema) => {
+        setSuccess(false)
+        setError(null)
 
-        try { 
-            await api.post("/forgot-password", data.email)
+        try
+        {
+            await api.post('/auth/forgot-password', {
+                email: data.email
+            })
+
             setSuccess(true)
-        }
-
-        catch (err) 
+        } catch (err)
         {
             const apiError = normalizeCatchError(err)
             setError(apiError)
         }
-    };
+    }
 
     return (
         <>
             <div className={s.bodyContainer}>
 
-                {success && <GlobalSuccess
-                    message={`Link enviado com sucesso.`}
-                    onClose={() => setSuccess(false)}
-                />}
+                {success && (
+                    <GlobalSuccess
+                        message="Se o e-mail estiver cadastrado, você receberá as instruções para redefinir sua senha."
+                        onClose={() => setSuccess(false)}
+                    />
+                )}
 
-                {error && <GlobalError 
-                    message={"Link para redefinição de senha enviado."} 
-                    onClose={() => setError(null)}
-                    />}
+                {error && (
+                    <GlobalError
+                        message="Não foi possível processar sua solicitação. Tente novamente."
+                        onClose={() => setError(null)}
+                    />
+                )}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
 
-                    <LockKeyhole
-                        size={48}
-                    />
+                    <LockKeyhole size={48} />
 
                     <p className={s.title}>Esqueceu sua senha?</p>
-                    <p className={s.desc}>Insira seu e-mail e enviaremos um link com as instruções para redefinição.</p>
+                    <p className={s.desc}>
+                        Insira seu e-mail e enviaremos um link com as instruções para redefinição.
+                    </p>
 
                     <div className={s.inputWrapper}>
 
                         <AuthInput
-                            {...register("email")}
-                            type='email'
-                            id='email'
-                            text='Digite seu email'
-                            placeholder='dave@gmail.com'
+                            {...register('email')}
+                            type="email"
+                            id="email"
+                            text="Digite seu email"
+                            placeholder="dave@gmail.com"
                             error={errors.email?.message}
-                            autoComplete='email'
-                            autoCapitalize='none'
+                            autoComplete="email"
+                            autoCapitalize="none"
                         />
 
-                        {errors.email && <InputError message={errors.email?.message} />}
+                        {errors.email && (
+                            <InputError message={errors.email.message} />
+                        )}
 
                     </div>
 
                     <button
                         disabled={!isValid || isSubmitting}
-                        type={"submit"}
-                        className={s.submitButton}>{isSubmitting ? "Carregando..." : "Enviar link de recuperação"}</button>
+                        type="submit"
+                        className={s.submitButton}
+                    >
+                        {isSubmitting ? 'Carregando...' : 'Enviar link de recuperação'}
+                    </button>
 
-                    <Link href={"/login"}>Voltar ao login</Link>
+                    <Link href="/login">Voltar ao login</Link>
 
                 </form>
             </div>

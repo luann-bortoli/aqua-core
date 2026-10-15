@@ -26,8 +26,6 @@ public class BootstrapAdmin implements CommandLineRunner
     public void run(String... args)
     {
 
-        System.out.println("BOOTSTRAP EXECUTADO");
-
         if (repository.findByEmail(adminEmail).isPresent())
         {
             return;

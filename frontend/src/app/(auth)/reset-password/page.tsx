@@ -9,11 +9,17 @@ import InputError from '@/src/shared/components/feedback/input-error/InputError'
 import { LockKeyhole } from 'lucide-react'
 import { resetPasswordSchema, ResetPasswordSchema } from './_features/schema/reset-password.schema'
 import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { api } from '@/src/shared/lib/api'
 import GlobalSuccess from '@/src/shared/components/feedback/global-succes/GlobalSuccess'
+import GlobalError from '@/src/shared/components/feedback/global-error/GlobalError'
 
 export default function ResetPassword() {
+    const searchParams = useSearchParams()
+    const token = searchParams.get('token')
 
     const [success, setSuccess] = useState(false)
+    const [error, setError] = useState(false)
 
     const {
         register,
@@ -25,27 +31,54 @@ export default function ResetPassword() {
         }
     } = useForm<ResetPasswordSchema>({
         resolver: zodResolver(resetPasswordSchema),
-        mode: "onChange"
+        mode: 'onChange'
     })
 
     const onSubmit = async (data: ResetPasswordSchema) => {
-        setSuccess(true)
-    };
+        setSuccess(false)
+        setError(false)
+
+        if (!token)
+        {
+            setError(true)
+            return
+        }
+
+        try
+        {
+            await api.post('/auth/reset-password', {
+                token,
+                newPassword: data.password
+            })
+
+            setSuccess(true)
+        } catch
+        {
+            setError(true)
+        }
+    }
 
     return (
         <>
             <div className={s.bodyContainer}>
 
-                {success && <GlobalSuccess
-                    message={`Link enviado com sucesso.`}
-                    onClose={() => setSuccess(false)}
-                />}
+                {success && (
+                    <GlobalSuccess
+                        message="Senha redefinida com sucesso. Você já pode entrar com sua nova senha."
+                        onClose={() => setSuccess(false)}
+                    />
+                )}
+
+                {error && (
+                    <GlobalError
+                        message="Não foi possível redefinir a senha. O link pode ter expirado ou ser inválido."
+                        onClose={() => setError(false)}
+                    />
+                )}
 
                 <form onSubmit={handleSubmit(onSubmit)} className={s.cardContainer}>
 
-                    <LockKeyhole
-                        size={48}
-                    />
+                    <LockKeyhole size={48} />
 
                     <p className={s.title}>Redefinição de senha</p>
                     <p className={s.desc}>Insira sua nova senha para realizar a alteração.</p>
@@ -53,37 +86,44 @@ export default function ResetPassword() {
                     <div className={s.inputWrapper}>
 
                         <AuthInput
-                            {...register("password")}
-                            type='password'
-                            id='password'
-                            text='Digite sua nova senha'
+                            {...register('password')}
+                            type="password"
+                            id="password"
+                            text="Digite sua nova senha"
                             error={errors.password?.message}
-                            autoComplete='password'
-                            autoCapitalize='none'
+                            autoComplete="new-password"
+                            autoCapitalize="none"
                         />
 
-                        {errors.password && <InputError message={errors.password?.message} />}
+                        {errors.password && (
+                            <InputError message={errors.password.message} />
+                        )}
 
                         <AuthInput
-                            {...register("repeatedPassword")}
-                            type='password'
-                            id='repeatedPassword'
-                            text='Digite a senha novamente'
+                            {...register('repeatedPassword')}
+                            type="password"
+                            id="repeatedPassword"
+                            text="Digite a senha novamente"
                             error={errors.repeatedPassword?.message}
-                            autoComplete='password'
-                            autoCapitalize='none'
+                            autoComplete="new-password"
+                            autoCapitalize="none"
                         />
 
-                        {errors.repeatedPassword && <InputError message={errors.repeatedPassword?.message} />}
+                        {errors.repeatedPassword && (
+                            <InputError message={errors.repeatedPassword.message} />
+                        )}
 
                     </div>
 
                     <button
-                        disabled={!isValid || isSubmitting}
-                        type={"submit"}
-                        className={s.submitButton}>{isSubmitting ? "Carregando..." : "Alterar senha"}</button>
+                        disabled={!isValid || isSubmitting || success}
+                        type="submit"
+                        className={s.submitButton}
+                    >
+                        {isSubmitting ? 'Carregando...' : 'Alterar senha'}
+                    </button>
 
-                    <Link href={"/login"}>Voltar ao login</Link>
+                    <Link href="/login">Voltar ao login</Link>
 
                 </form>
             </div>

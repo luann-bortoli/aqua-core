@@ -1,5 +1,6 @@
 package dev.luann.backend.modules.user;
 
+import dev.luann.backend.modules.passwordReset.PasswordResetRepository;
 import dev.luann.backend.modules.user.dto.UserPatchRequest;
 import dev.luann.backend.modules.user.dto.UserRequest;
 import dev.luann.backend.modules.user.dto.UserResponse;
@@ -25,6 +26,7 @@ public class UserService
     private final UserMapper mapper;
     private final PaginationMapper paginationMapper;
     private final PasswordEncoder encoder;
+    private final PasswordResetRepository passwordResetRepository;
 
     private User findUserById(UUID id){
 
@@ -88,6 +90,7 @@ public class UserService
 
         User target = findUserById(id);
 
+        passwordResetRepository.deleteByUser(target);
         repository.delete(target);
 
     }
