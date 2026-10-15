@@ -46,7 +46,7 @@ export default function UpdateTreatmentGroup() {
 
     const fetchCurrent = async () => {
 
-        const { data } = await api.get(`treatment-groups/${param.id}`)
+        const { data } = await api.get(`treatment/${param.id}`)
 
         reset({
             name: data.name

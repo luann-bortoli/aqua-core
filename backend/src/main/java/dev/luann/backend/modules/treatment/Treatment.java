@@ -2,7 +2,6 @@ package dev.luann.backend.modules.treatment;
 
 import dev.luann.backend.modules.product.Product;
 import dev.luann.backend.modules.treatment.dto.TreatmentContent;
-import dev.luann.backend.modules.treatment.dto.TreatmentStep;
 import dev.luann.backend.modules.treatment.subgroup.TreatmentSubGroup;
 import dev.luann.backend.shared.entity.BaseEntity;
 import dev.luann.backend.shared.enums.ContentStatus;
@@ -11,7 +10,6 @@ import jakarta.validation.Valid;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.util.List;
 
 @Entity
 @Table(name = "treatments")
