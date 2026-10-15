@@ -2,6 +2,8 @@
 
 A web application for managing treatment groups, subgroups, and treatments, built with Java, Spring Boot, and Next.js.
 
+<img width="1262" height="822" alt="Screenshot_2" src="https://github.com/user-attachments/assets/6f8fda77-e307-4236-aa55-aa72a2185871" />
+
 ## Tech Stack
 
 **Backend**
