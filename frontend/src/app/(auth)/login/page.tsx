@@ -62,8 +62,8 @@ export default function Login() {
                     <Image
                         src={"/logo.png"}
                         alt='logo'
-                        width={157}
-                        height={78}
+                        width={280}
+                        height={120}
                         priority
                     />
 
